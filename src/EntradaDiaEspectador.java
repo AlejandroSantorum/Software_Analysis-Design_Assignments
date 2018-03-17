@@ -1,8 +1,8 @@
 public class EntradaDiaEspectador extends Entrada{
   private float descuento;
 
-  public EntradaDiaEspectador(float precio, Pelicula pelicula, float descuento){
-    super(precio, pelicula);
+  public EntradaDiaEspectador(float precio, Sesion sesion, float descuento){
+    super(precio, sesion);
     this.descuento = descuento;
   }
 

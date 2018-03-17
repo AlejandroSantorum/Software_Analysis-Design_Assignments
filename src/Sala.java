@@ -10,7 +10,7 @@ public class Sala{
     this.id = id;
     filasTotales = filas;
     columnasTotales = columnas;
-    sesiones = ArrayList<Sesion>();
+    sesiones = new ArrayList<Sesion>();
   }
 
   public int getId(){
@@ -35,7 +35,7 @@ public class Sala{
 
   public Boolean addSesion(Sesion sesion){
     for(Sesion s: sesiones){
-      if(s.getFecha() == sesion.getFecha){
+      if(s.getFecha() == sesion.getFecha()){
         return false;
       }
     }
@@ -72,8 +72,5 @@ public class Sala{
   public void deleteSesion(Sesion sesion){
     sesiones.remove(sesion);
   }
-
-
-
 
 }

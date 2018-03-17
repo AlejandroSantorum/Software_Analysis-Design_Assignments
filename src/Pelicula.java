@@ -35,5 +35,17 @@ public class Pelicula{
     if(peli.titulo==this.titulo && peli.director==this.director && peli.anno==this.anno) return true;
     return false;
   }
+  public String toString(){
+    String aux;
+    
+    aux = "=====================================\n";
+    aux = aux + "TITULO: "+titulo+"\n";
+    aux = aux + "-------------------------------------\n"
+    aux = aux + "DIRECTOR: "+director+"\n";
+    aux = aux + "ANIO: "+anno+"\n";
+    aux = aux + "GENERO: "+genero+"\n";
+    aux = aux + "SINOPSIS: "+sinopsis;
+    return aux;
+  }
 
 }

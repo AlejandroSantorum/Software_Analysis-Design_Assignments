@@ -6,11 +6,13 @@ public class Sesion{
   private ArrayList<Butaca> butacas;
   private int butacasDisponibles;
   private Sala sala;
+  private float precioBase;
 
-  public Sesion(Calendar fecha, Pelicula pelicula, Sala sala){
+  public Sesion(Calendar fecha, Pelicula pelicula, Sala sala, float precioBase){
     this.fecha = fecha;
     this.pelicula = pelicula;
     this.sala = sala;
+    this.precioBase = precioBase;
     butacas = new ArrayList<Butaca>();
     butacasDisponibles = 0;
 
@@ -32,11 +34,17 @@ public class Sesion{
   public Sala getSala(){
     return sala;
   }
+  public float getPrecioBase(){
+    return precioBase;
+  }
   public int getButacasDisponibles(){
     return butacasDisponibles;
   }
   public ArrayList getButacas(){
     return butacas;
+  }
+  public int getNumeroButacasVendidas(){
+    return butacas.size()-butacasDisponibles;
   }
   public Boolean equals(Sesion sesion){
     if(this.fecha==sesion.fecha && this.pelicula.equals(sesion.pelicula) && this.sala.equals(sesion.sala)) return true;
@@ -44,31 +52,27 @@ public class Sesion{
   }
 
 
-
-
-
-  public Boolean actualizarButacasVendidas(int fila, int columna){
-    for(Butaca b: butacas){
-      if(b.getFila()==fila && b.getColumna==columna){
-        if(b.estaDisponible()){
-          b.ocuparButaca();
-          butacasDisponibles -= 1;
-          return true;
-        }else{
-          return false;
-        }
+  public Boolean actualizarButacasVendidas(int nEntradas){
+    Butaca aux;
+    int i, j;
+    
+    if(butacasDisponibles < nEntradas) return false;
+    
+    for(i=0; j=0; j<butacas.size() || i<nEntradas; j++){
+      aux = butacas.get(j);
+      if(aux.estaDisponible()){
+        aux.ocuparButaca();
+        i++;
       }
-      return false;
     }
+    for(Butaca b: butacas){
+      if(b.estaDisponible()){
+        b.ocuparButaca();
+        butacasDisponibles -= 1;
+        return true;
+      }
+    }
+    return false; /* No hay butacas disponibles */
   }
-
-  public Boolean actualizarButacasVendidas(){
-    for(Butaca b: )
-  }
-
-
-
-
-  /* ¿ public ArrayList getButacasDisponibles ? */
 
 }
