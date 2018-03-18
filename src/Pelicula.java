@@ -40,7 +40,7 @@ public class Pelicula{
     
     aux = "=====================================\n";
     aux = aux + "TITULO: "+titulo+"\n";
-    aux = aux + "-------------------------------------\n"
+    aux = aux + "-------------------------------------\n";
     aux = aux + "DIRECTOR: "+director+"\n";
     aux = aux + "ANIO: "+anno+"\n";
     aux = aux + "GENERO: "+genero+"\n";

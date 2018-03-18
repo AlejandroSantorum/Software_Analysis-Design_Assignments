@@ -58,7 +58,7 @@ public class Sesion{
     
     if(butacasDisponibles < nEntradas) return false;
     
-    for(i=0; j=0; j<butacas.size() || i<nEntradas; j++){
+    for(i=0, j=0; j<butacas.size() || i<nEntradas; j++){
       aux = butacas.get(j);
       if(aux.estaDisponible()){
         aux.ocuparButaca();

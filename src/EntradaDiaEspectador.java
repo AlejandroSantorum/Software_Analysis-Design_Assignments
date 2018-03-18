@@ -1,20 +1,20 @@
 public class EntradaDiaEspectador extends Entrada{
   private float descuento;
 
-  public EntradaDiaEspectador(float precio, Sesion sesion, float descuento){
-    super(precio, sesion);
+  public EntradaDiaEspectador(Sesion sesion, float descuento){
+    super(sesion);
     this.descuento = descuento;
   }
 
   public float getPrecio(){
-    return descuento * this.super();
-  }
+    return (super.getPrecio() * descuento);
+  } 
 
-  public getDescuento(){
+  public float getDescuento(){
     return descuento;
   }
 
-  public setDescuento(float descuento){
+  public void setDescuento(float descuento){
     this.descuento = descuento;
   }
 

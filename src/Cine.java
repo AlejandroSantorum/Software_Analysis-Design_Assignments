@@ -6,7 +6,7 @@ public class Cine{
   private ArrayList<Pelicula> listaPeliculas;
   private ArrayList<Sala> listaSalas;
   private ArrayList<Entrada> listaEntradas;
-  private int diaEspectador;
+  private DiaEspectador diaEspectador;
   private float descuentoDiaEspectador;
 
   public Cine(String nombre, String direccion, DiaEspectador diaEspectador){
@@ -16,7 +16,7 @@ public class Cine{
     this.listaSalas = new ArrayList<Sala>();
     this.listaEntradas = new ArrayList<Entrada>();
     this.diaEspectador = diaEspectador;
-    this.descuentoDiaEspectador = 0.8; /* Por defecto */
+    this.descuentoDiaEspectador = 0.8f; /* Por defecto */
   }
   
   public String getNombre(){
@@ -27,17 +27,27 @@ public class Cine{
     return direccion;
   }
   
-  public void setDiaEspectador(int diaEspectador){
+  public void setDiaEspectador(DiaEspectador diaEspectador){
     this.diaEspectador = diaEspectador;
   }
   
   public void setDescuentoDiaEspectador(float descuentoDE){
     this.descuentoDiaEspectador = descuentoDE;
   }
+  
+  public String toString(){
+    String aux;
+    
+    aux = "Nombre CINE: "+nombre+"\n";
+    aux = aux+"Direccion: "+direccion+"\n";
+    aux = aux+"Dia del espectador: "+diaEspectador+"\n";
+    aux = aux+"Descuento dia espectador: "+descuentoDiaEspectador+"\n";
+    return aux;
+  }
 
   public Boolean añadirPelicula(String titulo, String director, int anno, String sinopsis, Genero genero){
     for(Pelicula p: listaPeliculas){ /* Comprobamos que no existe ya esa pelicula */
-      if(p.getTitulo==titulo && p.getDirector()==director && p.getAnno()==anno){
+      if(p.getTitulo()==titulo && p.getDirector()==director && p.getAnno()==anno){
         System.out.println("Lo siento, la pelicula ya existe.\n");
         return false;
       }
@@ -52,7 +62,7 @@ public class Cine{
 
 
 
-  public Boolean añadirSesion(Calendar fecha, Pelicula pelicula, Sala sala){
+  public Boolean añadirSesion(Calendar fecha, Pelicula pelicula, Sala sala, float precioBase){
     int flag=0;
 
     for(Sala s: listaSalas){ /* Comprobamos que la sala existe */
@@ -61,7 +71,7 @@ public class Cine{
         break;
       }
     }
-    if(flag){
+    if(flag==0){
       System.out.println("Lo siento, la sala a la que se intenta añadir una sesion no existe\n");
       return false;
     }
@@ -73,12 +83,12 @@ public class Cine{
         break;
       }
     }
-    if(flag){
+    if(flag==0){
       System.out.println("Lo siento, la pelicula introducida no existe\n");
       return false;
     }
 
-    Sesion sesion = new Sesion(fecha, pelicula, sala); /* Creamos sesion */
+    Sesion sesion = new Sesion(fecha, pelicula, sala, precioBase); /* Creamos sesion */
     /* Añadimos sesion a la sala*/
     if(!sala.addSesion(sesion)){
       /* Control de errores: no puede haber dos sesiones
@@ -86,9 +96,7 @@ public class Cine{
       System.out.println("Lo siento, la sala ya tiene una sesion en el momento seleccionado\n");
       return false;
     }
-
-    /* Añadimos la sesion a la lista de sesiones del cine */
-    listaSesiones.add(sesion);
+    
     System.out.println("Sesion añadida con exito\n");
     return true;
   }
@@ -96,7 +104,7 @@ public class Cine{
 
   public Boolean añadirSala(int id, int filas, int columnas){
     for(Sala s: listaSalas){
-      if(s.getId==id){
+      if(s.getId()==id){
         System.out.println("Lo siento, ya existe una sala con ese identificador\n");
         return false;
       }
@@ -159,19 +167,19 @@ public class Cine{
   
   
   public float comprarEntradas(Sesion sesion, int nEntradas, TipoEntrada tipo){
-    int i, flag=1;
-    float precioFinalCompra=0.0;
+    int i, flag=0;
+    float precioFinalCompra=0.0f;
     
     for(Sala s: listaSalas){
       if(s.contieneSesion(sesion)){
-        flag = 0;
-        if(!s.actualizarButacasVendidas(nEntradas)){
+        flag = 1;
+        if(!sesion.actualizarButacasVendidas(nEntradas)){
           System.out.println("Lo sentimos, no hay "+nEntradas+" entradas disponibles en esta sesion.\n");
           return -1;
         }
       }
     }
-    if(flag){
+    if(flag==0){
       System.out.println("Lo sentimos, no existe la sesion seleccionada.\n");
       return -1;
     }
@@ -182,7 +190,7 @@ public class Cine{
         precioFinalCompra += entrEsp.getPrecio();
         listaEntradas.add(entrEsp);
       }
-    }else if(sesion.getFecha().get(Calendar.DAY_OF_WEEK) == diaEspectador){
+    }else if(sesion.getFecha().get(Calendar.DAY_OF_WEEK) == diaEspectador.getDia()){
       for(i=0; i<nEntradas; i++){
         EntradaDiaEspectador entrDiaEspect = new EntradaDiaEspectador(sesion, descuentoDiaEspectador);
         precioFinalCompra += entrDiaEspect.getPrecio();

@@ -60,7 +60,7 @@ public class Sala{
     * se emite la pelicula a eliminar.
     * Si existe, es eliminada */
     while(iter.hasNext()){
-      if(s.getPelicula.equals(iter.next())) {
+      if(pelicula.equals(iter.next().getPelicula())) {
         iter.remove();
       }
     }

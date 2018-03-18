@@ -20,7 +20,7 @@ public class Butaca{
     return disponible;
   }
 
-  public ocuparButaca(){
+  public void ocuparButaca(){
     disponible = false;
   }
 

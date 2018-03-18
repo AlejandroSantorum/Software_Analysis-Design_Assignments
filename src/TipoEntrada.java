@@ -12,7 +12,7 @@ public enum TipoEntrada{
     }
     
     public float getDescuento(){
-        return precio;
+        return descuento;
     }
     
     public void setDescuento(float descuento){
