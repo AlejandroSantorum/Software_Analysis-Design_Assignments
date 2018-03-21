@@ -9,7 +9,7 @@ import java.util.*;
  * @author Alejandro Santorum Varela y David Cabornero Pascual - alejandro.santorum@estudiante.uam.es / david.cabornero@estudiante.uam.es
  *
  */
-public class Sesion{
+public class Sesion implements Comparable<Sesion>{
   /**
    * Atributos de la clase Sesion:
    */
@@ -99,6 +99,17 @@ public class Sesion{
   public int getNumeroButacasVendidas(){
     return butacas.size()-butacasDisponibles;
   }
+  
+  public String toString(){
+    String aux;
+    
+    aux = "Fecha: "+fecha.get(Calendar.DATE)+"-"+fecha.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
+                    +"-"+fecha.get(Calendar.YEAR)+" a las "+fecha.get(Calendar.HOUR_OF_DAY)+":"+fecha.get(Calendar.MINUTE)+"\n";
+    aux = aux + "Sala: "+sala.getId()+" \n";
+    aux = aux + "Precio base: "+precioBase;
+    return aux;
+  }
+  
   /**
    * Muestra si una sesion es igual a otra sesion ya creada.
    * @param sesion Sesion con la que queremos comparar nuestra sesion
@@ -107,6 +118,29 @@ public class Sesion{
   public Boolean equals(Sesion sesion){
     if(this.fecha==sesion.fecha && this.pelicula.equals(sesion.pelicula) && this.sala.equals(sesion.sala)) return true;
     return false;
+  }
+  
+  @Override
+  public int compareTo(Sesion ses){
+    GregorianCalendar gc1 = this.getFecha();
+    GregorianCalendar gc2 = ses.getFecha();
+    
+    if(gc1.get(Calendar.YEAR) != gc2.get(Calendar.YEAR)){
+      return gc1.get(Calendar.YEAR) - gc2.get(Calendar.YEAR);
+    }
+    if(gc1.get(Calendar.MONTH) != gc2.get(Calendar.MONTH)){
+      return gc1.get(Calendar.MONTH) - gc2.get(Calendar.MONTH);
+    }
+    if(gc1.get(Calendar.DATE) != gc2.get(Calendar.DATE)){
+      return gc1.get(Calendar.DATE) - gc2.get(Calendar.DATE);
+    }
+    if(gc1.get(Calendar.HOUR_OF_DAY) != gc2.get(Calendar.HOUR_OF_DAY)){
+      return gc1.get(Calendar.HOUR_OF_DAY) - gc2.get(Calendar.HOUR_OF_DAY);
+    }
+    if(gc1.get(Calendar.MINUTE) != gc2.get(Calendar.MINUTE)){
+      return gc1.get(Calendar.MINUTE) - gc2.get(Calendar.MINUTE);
+    }
+    return 0;
   }
 
   /**

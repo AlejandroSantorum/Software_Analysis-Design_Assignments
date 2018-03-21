@@ -18,6 +18,7 @@ public class Cine{
   private ArrayList<Pelicula> listaPeliculas;
   private ArrayList<Sala> listaSalas;
   private ArrayList<Entrada> listaEntradas;
+  private Cartelera cartelera;
   private DiaEspectador diaEspectador;
   private float descuentoDiaEspectador;
   
@@ -36,6 +37,7 @@ public class Cine{
     this.listaPeliculas = new ArrayList<Pelicula>();
     this.listaSalas = new ArrayList<Sala>();
     this.listaEntradas = new ArrayList<Entrada>();
+    this.cartelera = new Cartelera();
     this.diaEspectador = diaEspectador;
     this.descuentoDiaEspectador = 0.8f; /* Por defecto */
   }
@@ -95,14 +97,19 @@ public class Cine{
   public Boolean anadirPelicula(String titulo, String director, int anno, String sinopsis, Genero genero){
     for(Pelicula p: listaPeliculas){ /* Comprobamos que no existe ya esa pelicula */
       if(p.getTitulo()==titulo && p.getDirector()==director && p.getAnno()==anno){
-        System.out.println("Lo siento, la pelicula ya existe.\n");
+        System.err.println("Lo siento, la pelicula ya existe.\n");
         return false;
       }
     }
 
     /* Creamos pelicula y la añadimos a la lista de peliculas del cine */
     Pelicula peli = new Pelicula(titulo, director, anno, sinopsis, genero);
+    if(peli==null){
+      System.err.println("Error de memoria. Constructor Pelicula en anadirPelicula() ha fallado");
+      return false;
+    }
     listaPeliculas.add(peli);
+    cartelera.addPelicula(peli);
     System.out.println("Pelicula añadida con éxito.\n");
     return true;
   }
@@ -128,7 +135,7 @@ public class Cine{
       }
     }
     if(flag==0){
-      System.out.println("Lo siento, la sala a la que se intenta añadir una sesion no existe\n");
+      System.err.println("Lo siento, la sala a la que se intenta añadir una sesion no existe\n");
       return false;
     }
 
@@ -140,19 +147,23 @@ public class Cine{
       }
     }
     if(flag==0){
-      System.out.println("Lo siento, la pelicula introducida no existe\n");
+      System.err.println("Lo siento, la pelicula introducida no existe\n");
       return false;
     }
 
     Sesion sesion = new Sesion(fecha, pelicula, sala, precioBase); /* Creamos sesion */
+    if(sesion==null){
+      System.err.println("Error de memoria. Constructor Sesion en anadirSesion() ha fallado");
+      return false;
+    }
     /* Añadimos sesion a la sala*/
     if(!sala.addSesion(sesion)){
       /* Control de errores: no puede haber dos sesiones
        * a la misma hora de un dia en una misma sala */
-      System.out.println("Lo siento, la sala ya tiene una sesion en el momento seleccionado\n");
+      System.err.println("Lo siento, la sala ya tiene una sesion en el momento seleccionado\n");
       return false;
     }
-    
+    cartelera.addSesion(sesion);
     System.out.println("Sesion añadida con exito\n");
     return true;
   }
@@ -168,12 +179,12 @@ public class Cine{
    */
   public Boolean anadirSala(int id, int filas, int columnas){
     if(filas <= 0 || columnas <= 0){
-      System.out.println("Lo siento, debe haber al menos una fila y una columna en la sala");
+      System.err.println("Lo siento, debe haber al menos una fila y una columna en la sala");
       return false;
     }
     for(Sala s: listaSalas){
       if(s.getId()==id){
-        System.out.println("Lo siento, ya existe una sala con ese identificador\n");
+        System.err.println("Lo siento, ya existe una sala con ese identificador\n");
         return false;
       }
     }
@@ -182,7 +193,7 @@ public class Cine{
     Sala sala = new Sala(id, filas, columnas);
     /* Introducimos la sala en la lista de salas del cine */
     listaSalas.add(sala);
-    System.out.println("Sesion añadida con exito\n");
+    System.out.println("Sala añadida con exito\n");
     return true;
   }
 
@@ -203,6 +214,7 @@ public class Cine{
     }
     /* Eliminamos la pelicula de la lista de peliculas */
     listaPeliculas.remove(pelicula);
+    cartelera.deletePelicula(pelicula);
     System.out.println("Pelicula eliminada con exito\n");
     return true;
   }
@@ -221,6 +233,7 @@ public class Cine{
     for(Sala s: listaSalas){
       if(s.contieneSesion(sesion)){
         s.deleteSesion(sesion);
+        cartelera.deleteSesion(sesion);
         System.out.println("Sesion eliminada con exito.\n");
         return true;
       }
@@ -273,7 +286,7 @@ public class Cine{
       }
     }
     if(flag==0){
-      System.out.println("Lo sentimos, no existe la sesion seleccionada.\n");
+      System.err.println("Lo sentimos, no existe la sesion seleccionada.\n");
       return -1;
     }
     
@@ -298,15 +311,6 @@ public class Cine{
     }
     
     return precioFinalCompra;
-  }
-  
-  /**
-   * Imprime en pantalla todas las peliculas del array
-   */
-  public void printCartelera(){
-    for(Pelicula peli: listaPeliculas){
-      System.out.println(peli);
-    }
   }
   
   
