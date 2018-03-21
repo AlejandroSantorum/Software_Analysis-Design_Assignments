@@ -59,7 +59,7 @@ public class testEntradas{
         System.out.println("Creando una entrada especial...");
         System.out.println("En este caso de tipo FIESTA pero las comprobaciones son analogas para los demas tipos");
         
-        Entrada entrESP = new EntradaEspecial(ses, TipoEntrada.FIESTA.getDescuento());
+        Entrada entrESP = new EntradaEspecial(ses, TipoEntrada.FIESTA);
         if(entrESP==null){
             System.err.println("OBJETO EntradaEspecial IGUAL A NULL");
             return;
@@ -76,6 +76,6 @@ public class testEntradas{
         System.out.println("¿Es el precio de la entrada igual a 4.0 (80% de 5.0)? --> "+(entrESP.getPrecio() == 4.0f));
         System.out.println("\nSI TODO LO ANTERIOR ES IGUAL A true, ENTONCES COMPROBACION SUPERADA CON EXITO\n");
         
-        System.out.println("\n == COMPROBACIONES DE LA CLASES ENTRADAS SUPERADAS CON EXITO ==\n");
+        System.out.println("\n == COMPROBACIONES DE LAS CLASES ENTRADAS SUPERADAS CON EXITO ==\n");
     }
 }

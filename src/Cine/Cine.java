@@ -279,7 +279,7 @@ public class Cine{
     
     if(tipo != TipoEntrada.NORMAL){
       for(i=0; i<nEntradas; i++){
-        EntradaEspecial entrEsp = new EntradaEspecial(sesion, tipo.getDescuento());
+        EntradaEspecial entrEsp = new EntradaEspecial(sesion, tipo);
         precioFinalCompra += entrEsp.getPrecio();
         listaEntradas.add(entrEsp);
       }

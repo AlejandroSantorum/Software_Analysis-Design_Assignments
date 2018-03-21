@@ -12,18 +12,19 @@ public class EntradaEspecial extends Entrada{
    * Atributos de la clase EntradaEspecial:
    */
   private float descuento;
+  private TipoEntrada tipoEntrada;
   
   /**
    * Constructor de EntradaEspecial, al que le debemos especificar la sesion 
-   * a la que queremos acceder y el descuento a aplicar, pues su precio estandar
-   * viene ya determinado por la sesion
+   * a la que queremos acceder y el tipo de entrada que contiene el descuento
+   * a aplicar, pues su precio estandar viene ya determinado por la sesion
    */
-  public EntradaEspecial(Sesion sesion, float descuento){
+  public EntradaEspecial(Sesion sesion, TipoEntrada tipoEntrada){
     super(sesion);
     if(descuento < 0){
       throw new IllegalArgumentException("Descuento menor que cero = " + descuento); 
     }
-    this.descuento = descuento;
+    this.descuento = tipoEntrada.getDescuento();
   }
   
   /**
@@ -39,16 +40,6 @@ public class EntradaEspecial extends Entrada{
    */
   public float getDescuento(){
     return descuento;
-  }
-  /**
-   * Permite modificar el descuento de la entrada (entre 0 y 1)
-   * @param descuento Descuento de la entrada (entre 0 y 1)
-   */
-  public void setDescuento(float descuento){
-    if(descuento < 0){
-      throw new IllegalArgumentException("Descuento menor que cero = " + descuento); 
-    }
-    this.descuento = descuento;
   }
 
 }
