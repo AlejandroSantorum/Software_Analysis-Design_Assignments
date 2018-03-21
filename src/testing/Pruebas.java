@@ -7,7 +7,7 @@ public class Pruebas{
         System.out.println(cine);
         
         GregorianCalendar fecha1 = new GregorianCalendar(2018, 03, 19);
-       GregorianCalendar fecha2 = new GregorianCalendar(2018, 03, 20);
+        GregorianCalendar fecha2 = new GregorianCalendar(2018, 03, 20);
         GregorianCalendar fecha3 = new GregorianCalendar(2018, 03, 21);
         GregorianCalendar fecha4 = new GregorianCalendar(2018, 03, 22);
         GregorianCalendar fecha5 = new GregorianCalendar(2018, 03, 23);
