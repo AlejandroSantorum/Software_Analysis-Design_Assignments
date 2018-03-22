@@ -86,21 +86,22 @@ public class Cartelera{
     /**
      * Imprime todas las sesiones, ordenadas por peliculas
      */
-    public void mostrarCartelera(){
+    public String toString(){
         ArrayList<Sesion> auxiliar = new ArrayList<Sesion>();
-        System.out.println("\t===== C A R T E L E R A =====\n");
+        String aux;
+        aux = "\t===== C A R T E L E R A =====\n";
         
         for(Pelicula p: peliculas){
             auxiliar = getSesionesPorPelicula(p);
             
             Collections.sort(auxiliar);
             
-            System.out.println("--- SESIONES DE "+p.getTitulo() +" ---\n");
+            aux += "\n--- SESIONES DE "+p.getTitulo() +" ---\n";
             for(Sesion s: auxiliar){
-                System.out.println(s);
-                System.out.println(" ");
+                aux += ""+s;
             }
         }
+        return aux;
     }
     
 }

@@ -59,7 +59,7 @@ public class testTotal{
         
         
         System.out.println("Procediendo a mostrar la cartelera...");
-        cartelera.mostrarCartelera();
+        cine.mostrarCartelera();
         System.out.println("\nCartelera mostrada con exito\n");
         
         
@@ -105,7 +105,7 @@ public class testTotal{
         cine.anadirSesion(new GregorianCalendar(2018, 02, 1, 1, 11), peliculas.get(1), salaFallo, 10.00f);
         cine.anadirPelicula(peliculas.get(1).getTitulo(), peliculas.get(1).getDirector(), peliculas.get(1).getAnno(), 
                                                         peliculas.get(1).getSinopsis(), peliculas.get(1).getGenero());
-        cine.anadirSala(2, 15, 15);
+        cine.anadirSala(3, 15, 15);
         cine.comprarEntradas(sesFallo, 5, TipoEntrada.NORMAL);
         cine.comprarEntradas(sesiones.get(1), 10000, TipoEntrada.NORMAL);
         

@@ -49,7 +49,9 @@ public class testCartelera{
         
         System.out.println("Imprimiendo cartelera...");
         
-        cartelera.mostrarCartelera();
+        System.out.println(cartelera);
+        
+        System.out.println("Testing clase Cartelera superado con EXITO");
         
     }
 }

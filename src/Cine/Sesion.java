@@ -106,7 +106,7 @@ public class Sesion implements Comparable<Sesion>{
     aux = "Fecha: "+fecha.get(Calendar.DATE)+"-"+fecha.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
                     +"-"+fecha.get(Calendar.YEAR)+" a las "+fecha.get(Calendar.HOUR_OF_DAY)+":"+fecha.get(Calendar.MINUTE)+"\n";
     aux = aux + "Sala: "+sala.getId()+" \n";
-    aux = aux + "Precio base: "+precioBase;
+    aux = aux + "Precio base: "+precioBase+"\n";
     return aux;
   }
   

@@ -356,4 +356,8 @@ public class Cine{
   }
   
   
+  public void mostrarCartelera(){
+    System.out.println(cartelera);
+  }
+  
 }
