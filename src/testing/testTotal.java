@@ -92,10 +92,10 @@ public class testTotal{
         
         System.out.println("Escenario de exito COMPROBADO. Ahora eliminaremos algunas peliculas, sesiones y/o salas y se intentara forzar el sistema a fallar");
         
-        cine.eliminarPelicula(peliculas.get(0));
-        cine.eliminarSala(salas.get(0));
+        cine.eliminarSesion(sesiones.get(0));
+        cine.eliminarPelicula(peliculas.get(2));
+        cine.eliminarSala(salas.get(1));
         
-        sesiones = cine.getSesiones();
         
         Pelicula peliFallo = new Pelicula("Pelicula del fallo", "Alejandro Santorum", 2020, "Una pelicula creada para que falle el sistema", Genero.AVENTURAS);
         Sala salaFallo = new Sala(1234, 3, 3);
