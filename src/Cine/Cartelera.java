@@ -84,7 +84,9 @@ public class Cartelera{
     }
     
     /**
-     * Imprime todas las sesiones, ordenadas por peliculas
+     * Devuelve en formato String  todas las sesiones, ordenadas por peliculas
+     * @return String con toda la informacione acerca de las sesiones ordenadas
+     * por pelicula
      */
     public String toString(){
         ArrayList<Sesion> auxiliar = new ArrayList<Sesion>();

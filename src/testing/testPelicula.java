@@ -1,5 +1,14 @@
 import java.util.*;
 
+/**
+   * Tester de la clase Pelicula
+   *
+   * <p>Este tester comprueba que todos los métodos de la clase Pelicula
+   * han sido creados sin errores.</p>
+   *
+   * @param args No se espera que se pase ningun argumento de entrada
+   */
+   
 public class testPelicula{
     public static void main(String[] args){
         

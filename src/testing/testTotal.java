@@ -1,5 +1,14 @@
 import java.util.*;
 
+/**
+   * Tester de la clase Cine
+   *
+   * <p>Este tester comprueba que todos los métodos de la clase Cine
+   * han sido creados sin errores.</p>
+   *
+   * @param args No se espera que se pase ningun argumento de entrada
+   */
+   
 public class testTotal{
     public static void main(String[] args){
         System.out.println("=============== INTEGRATION TEST ===============\n");
@@ -8,8 +17,6 @@ public class testTotal{
         Cine cine = new Cine("Cinesa", "Plaza de la puerta del Sol", DiaEspectador.MIERCOLES);
         System.out.println(cine);
         System.out.println("Cine creado con exito\n");
-        
-        Cartelera cartelera = cine.getCartelera();
         
         System.out.println("Creando peliculas, salas y sesiones de prueba...");
         
@@ -82,7 +89,7 @@ public class testTotal{
         
         for(Pelicula p: peliculas){
             System.out.println(p);
-            ArrayList<Sesion> auxSes = cartelera.getSesionesPorPelicula(p);
+            ArrayList<Sesion> auxSes = cine.getSesionesPorPelicula(p);
             for(Sesion s: auxSes){
                 s.mostrarInfoDetalladaSesion();
             }

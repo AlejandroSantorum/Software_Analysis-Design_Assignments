@@ -1,6 +1,15 @@
 import java.util.*;
 
-public class testEntradas{
+/**
+   * Tester de la clase Entrada
+   *
+   * <p>Este tester comprueba que todos los métodos de la clase Entrada
+   * han sido creados sin errores.</p>
+   *
+   * @param args No se espera que se pase ningun argumento de entrada
+   */
+   
+public class testEntrada{
     public static void main(String[] args){
         
         System.out.println("=== CLASES DE ENTRADAS TESTING ===");

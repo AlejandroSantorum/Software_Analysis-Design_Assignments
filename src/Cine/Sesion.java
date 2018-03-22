@@ -100,6 +100,10 @@ public class Sesion implements Comparable<Sesion>{
     return butacas.size()-butacasDisponibles;
   }
   
+  /**
+   * Devuelve como String la sesion, indicando su fecha, su sala y su precio base.
+   * @return String de la sesion.
+   */
   public String toString(){
     String aux;
     
@@ -110,6 +114,10 @@ public class Sesion implements Comparable<Sesion>{
     return aux;
   }
   
+  /**
+   * Imprime por pantalla toda la informacion de la sesion, es decir, la pelicula emitida, su fecha, su sala, su precio base,
+   * las butacas vendidas y las libres.
+   */
   public void mostrarInfoDetalladaSesion(){
     String aux;
     
@@ -133,8 +141,13 @@ public class Sesion implements Comparable<Sesion>{
     return false;
   }
   
-  @Override
-  public int compareTo(Sesion ses){
+  /**
+   * Compara dos sesiones segun su fecha.
+   * @param ses Sesion con la que compararemos con nuestra sesion
+   * @return Entero positivo si la segunda sesion empieza antes,
+   * negativo si la primera sesion empieza antes, y 0 si empiezan a la vez.
+   */
+  @Override public int compareTo(Sesion ses){
     GregorianCalendar gc1 = this.getFecha();
     GregorianCalendar gc2 = ses.getFecha();
     

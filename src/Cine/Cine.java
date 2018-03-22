@@ -120,7 +120,7 @@ public class Cine{
     aux = "Nombre CINE: "+nombre+"\n";
     aux = aux+"Direccion: "+direccion+"\n";
     aux = aux+"Dia del espectador: "+diaEspectador+"\n";
-    aux = aux+"Descuento dia espectador: "+descuentoDiaEspectador+"\n";
+    aux = aux+"Descuento dia espectador: "+ (Math.round((1 - descuentoDiaEspectador)*100))+"%"+"\n";
     return aux;
   }
   
@@ -133,7 +133,8 @@ public class Cine{
    * @param anno Anyo de lanzamiento de la pelicula
    * @param sinopsis Sinopsis de la pelicula
    * @param genero Genero de la pelicula
-   * @return false si ya esta incluida esa pelicula, true en caso contrario
+   * @return false si ya esta incluida esa pelicula o ha habido un error, true en 
+   * caso contrario
    */
   public Boolean anadirPelicula(String titulo, String director, int anno, String sinopsis, Genero genero){
     for(Pelicula p: listaPeliculas){ /* Comprobamos que no existe ya esa pelicula */
@@ -355,7 +356,19 @@ public class Cine{
     return precioFinalCompra;
   }
   
+  /**
+   * Devuelve un array con todas las sesiones correspondientes a cierta pelicula.
+   * @param p Pelicula de la que queremos obtener sus sesiones
+   * @return Array de sesiones que emiten la pelicula
+   */
+  public ArrayList<Sesion> getSesionesPorPelicula(Pelicula p){
+    return cartelera.getSesionesPorPelicula(p);
+  }
   
+  /**
+   * Imprime la cartlera en pantalla, tal y como lo hace la funcion toString
+   * dentro de la clase Cartelera
+   */
   public void mostrarCartelera(){
     System.out.println(cartelera);
   }

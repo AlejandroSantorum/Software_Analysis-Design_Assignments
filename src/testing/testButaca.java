@@ -1,5 +1,13 @@
 import java.util.*;
 
+/**
+   * Tester de la clase Butaca
+   *
+   * <p>Este tester comprueba que todos los métodos de la clase Butaca
+   * han sido creados sin errores.</p>
+   *
+   * @param args No se espera que se pase ningun argumento de entrada
+   */
 public class testButaca{
     public static void main(String[] args){
         

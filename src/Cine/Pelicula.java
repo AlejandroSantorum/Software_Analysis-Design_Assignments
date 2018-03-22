@@ -81,6 +81,7 @@ public class Pelicula{
   /**
    * Pasa a formato String la Pelicula, indicando todos sus atributos de forma
    * ordenada.
+   * @return String de la pelicula con sus caracteristicas.
    */
   public String toString(){
     String aux;
