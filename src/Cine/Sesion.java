@@ -110,13 +110,26 @@ public class Sesion implements Comparable<Sesion>{
     return aux;
   }
   
+  public void mostrarInfoDetalladaSesion(){
+    String aux;
+    
+    aux = "Pelicula: "+pelicula.getTitulo()+"\n";
+    aux += "Fecha: "+fecha.get(Calendar.DATE)+"-"+fecha.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
+            +"-"+fecha.get(Calendar.YEAR)+" a las "+fecha.get(Calendar.HOUR_OF_DAY)+":"+fecha.get(Calendar.MINUTE)+"\n";
+    aux += "Sala: "+sala.getId()+"\n";
+    aux += "Precio base: "+precioBase+"\n";
+    aux += "Numero entradas vendidas: "+this.getNumeroButacasVendidas()+"\n";
+    aux += "Numero de butacas disponibles: "+this.getButacasDisponibles()+"\n";
+    System.out.println(aux);
+  }
+  
   /**
    * Muestra si una sesion es igual a otra sesion ya creada.
    * @param sesion Sesion con la que queremos comparar nuestra sesion
    * @return True si las sesiones son iguales, False si son distintas
    */
   public Boolean equals(Sesion sesion){
-    if(this.fecha==sesion.fecha && this.pelicula.equals(sesion.pelicula) && this.sala.equals(sesion.sala)) return true;
+    if(this.fecha.equals(sesion.fecha) && this.pelicula.equals(sesion.pelicula) && this.sala.equals(sesion.sala)) return true;
     return false;
   }
   

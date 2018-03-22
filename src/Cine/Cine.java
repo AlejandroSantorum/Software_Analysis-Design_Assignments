@@ -56,6 +56,47 @@ public class Cine{
     return direccion;
   }
   /**
+   * Devuelve la cartelera del cine
+   * @return Cartelera del cine
+   */
+  public Cartelera getCartelera(){
+    return cartelera;
+  }
+  /**
+   * Devuelve la lista de peliculas del cine
+   * @return Lista de peliculas del cine
+   */
+  public ArrayList<Pelicula> getPeliculas(){
+    return listaPeliculas;
+  }
+  /**
+   * Devuelve la lista de salas del cine
+   * @return Lista de salas del cine
+   */
+  public ArrayList<Sala> getSalas(){
+    return listaSalas;
+  }
+  /**
+   * Devuelve la lista de entradas del cine
+   * @return Lista de entradas del cine
+   */
+  public ArrayList<Entrada> getEntradas(){
+    return listaEntradas;
+  }
+  /**
+   * Devuelve la lista de sesiones del cine
+   * @return Lista de sesiones del cine
+   */
+  public ArrayList<Sesion> getSesiones(){
+    ArrayList<Sesion> sesiones = new ArrayList<Sesion>();
+    
+    for(Sala s: listaSalas){
+      sesiones.addAll(s.getSesiones());
+    }
+    return sesiones;
+  }
+  
+  /**
    * Permite modificar el dia del espectador del cine
    * @param diaEspectador Nuevo dia del espectador del cine 
    */
@@ -286,7 +327,7 @@ public class Cine{
       }
     }
     if(flag==0){
-      System.err.println("Lo sentimos, no existe la sesion seleccionada.\n");
+      System.err.println("Lo sentimos, no existe la sesion seleccionada para comprar entradas.\n");
       return -1;
     }
     
@@ -310,6 +351,7 @@ public class Cine{
       }
     }
     
+    System.out.println("Entradas compradas con exito. Precio final = "+precioFinalCompra);
     return precioFinalCompra;
   }
   

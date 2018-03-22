@@ -34,6 +34,7 @@ public class testSesion{
         
         System.out.println("Creando otra sesion con diferentes parametros para comprobar el funcionamiento de equals()");
         Sesion ses2 = new Sesion(new GregorianCalendar(2018, 02, 22, 22, 30), pel, sal, 10.00f);
+        Sesion ses3 = new Sesion(new GregorianCalendar(2018, 02, 22, 22, 30), pel, sal, 10.00f);
         
         if(ses.equals(ses2)){
             System.err.println("Error de funcionamiento de la funcion equals()");
@@ -44,7 +45,7 @@ public class testSesion{
         System.out.println("¿Son iguales las dos sesiones creadas? --> "+ses.equals(ses2));
         System.out.println("Correcto");
         System.out.println("Comprobando que equals() devuelve true cuando se le pasa dos sesiones iguales...");
-        System.out.println("¿Es igual una sesion consigo misma? --> "+ses.equals(ses));
+        System.out.println("¿Es igual una sesion consigo misma? --> "+ses2.equals(ses3));
         
         System.out.println("Funcionamiento correcto\n");
         

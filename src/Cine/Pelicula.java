@@ -91,7 +91,7 @@ public class Pelicula{
     aux = aux + "DIRECTOR: "+director+"\n";
     aux = aux + "ANIO: "+anno+"\n";
     aux = aux + "GENERO: "+genero+"\n";
-    aux = aux + "SINOPSIS: "+sinopsis;
+    aux = aux + "SINOPSIS: "+sinopsis+"\n";
     return aux;
   }
   
