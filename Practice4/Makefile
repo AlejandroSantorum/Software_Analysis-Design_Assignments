@@ -2,7 +2,7 @@ JAVAC=javac
 BUILD_DIR=build
 ZIP_NAME=GR2202_AlejandroDavid
 DIST_PATH=./*
-JFLAGS=-d $(BUILD_DIR) -cp $(BUILD_DIR) -sourcepath $(SRC_DIR)/Cine/
+JFLAGS=-d $(BUILD_DIR) -cp $(BUILD_DIR) -sourcepath $(SRC_DIR)/java/
 SRC_DIR=src
 sources = $(wildcard $(SRC_DIR)/*.java) \
 			$(wildcard $(SRC_DIR)/**/*.java)

@@ -1,9 +1,12 @@
-public abstract class Nodo implements INodo{
+import java.util.*;
+
+public abstract class Nodo implements INodo, Cloneable{
     private String simbolo;
     private int maxDescendientes;
-    private ArrayList<Nodo> descendientes;
+    private ArrayList<INodo> descendientes;
     
     public Nodo(String simbolo, int maxDescendientes){
+        descendientes = new ArrayList<INodo>();
         this.simbolo = simbolo;
         this.maxDescendientes = maxDescendientes;
     }
@@ -18,7 +21,8 @@ public abstract class Nodo implements INodo{
     
     public void incluirDescendiente(INodo nodo){
         if(this.descendientes.size() == maxDescendientes){
-            excepcion 
+            //---> excepcion <--- 
+            System.out.println("ERROROROROROROROOROROORORO MAXDESCENDIENTES");
         }
         this.descendientes.add(nodo);
     }
@@ -28,4 +32,5 @@ public abstract class Nodo implements INodo{
     public INodo copy() throws CloneNotSupportedException{
         return (INodo) this.clone();
     }
+    
 }
