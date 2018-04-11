@@ -19,6 +19,12 @@ public abstract class Nodo implements INodo, Cloneable{
         return descendientes;
     }
     
+    
+    public int getMaxDescendientes(){
+        return maxDescendientes;
+    }
+    
+    
     public void incluirDescendiente(INodo nodo){
         if(this.descendientes.size() == maxDescendientes){
             //---> excepcion <--- 
