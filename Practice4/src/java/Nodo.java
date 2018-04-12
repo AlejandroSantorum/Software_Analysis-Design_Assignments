@@ -68,6 +68,7 @@ public abstract class Nodo implements INodo, Cloneable{
     public abstract INodo copy();
     
     
+    // Esta funcion devuelve todos los descendientes del nodo MÁS EL PROPIO NODO
     public ArrayList<INodo> getAllDescendientes(){
         ArrayList<INodo> arrayAuxiliar = new ArrayList<INodo>();
         ArrayList<INodo> ret = new ArrayList<INodo>();

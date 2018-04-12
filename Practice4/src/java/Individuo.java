@@ -12,6 +12,14 @@ public class Individuo implements IIndividuo{
         raiz = expresion;
     }
     
+    public double calcularExpresion(){
+        return this.raiz.calcular();
+    }
+    
+    public int getNumeroNodos(){
+        return ((Nodo) this.raiz).getAllDescendientes().size();
+    }
+    
     public void writeIndividuo(){
         System.out.println(this.raiz);
     }
@@ -23,8 +31,11 @@ public class Individuo implements IIndividuo{
     public void setFitness(double fitness){
         this.fitness = fitness;
     }
+    
+    public void etiquetaNodos(){
+        ((Nodo) this.raiz).etiquetarDescendientes();
+    }
     /*
     public abstract void crearIndividuoAleatorio(int profundidad, List<Terminal> terminales, List<Funcion> funciones);
-    public abstract double calcularExpresion();
-    public abstract int getNumeroNodos();*/
+    */
 }
