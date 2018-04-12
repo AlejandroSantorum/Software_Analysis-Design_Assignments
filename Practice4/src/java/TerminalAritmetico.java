@@ -11,7 +11,13 @@ public class TerminalAritmetico extends Terminal{
         return valor;
     }
     
-    public void setValor(double valor){
-        this.valor = valor;
-    } 
+    public static void setValor(double val){
+        valor = val;
+    }
+    
+    public INodo copy(){
+        TerminalAritmetico ta = new TerminalAritmetico(this.getRaiz());
+        
+        return ta;
+    }
 }

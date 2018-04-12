@@ -16,4 +16,20 @@ public class FuncionResta extends Funcion{
         return calculo;
     }
     
+    
+    public INodo copy(){
+        FuncionResta fr = new FuncionResta(this.getRaiz(), this.getMaxDescendientes());
+        
+        ArrayList<INodo> arrayDes = this.getDescendientes();
+        
+        if(arrayDes.size() > 0){
+            for(INodo n: arrayDes){
+                INodo nuevo = n.copy();
+                fr.incluirDescendiente(nuevo);
+            }
+        }
+        
+        return fr;
+    }
+    
 }

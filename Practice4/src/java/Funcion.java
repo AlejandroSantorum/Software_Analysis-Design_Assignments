@@ -9,6 +9,8 @@ public abstract class Funcion extends Nodo{
     
     public abstract double calcular();
     
+    public abstract INodo copy();
+    
     
     public String toString(){
         String aux;

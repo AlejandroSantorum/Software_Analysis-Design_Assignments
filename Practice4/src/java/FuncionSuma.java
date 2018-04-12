@@ -15,4 +15,20 @@ public class FuncionSuma extends Funcion{
         }
         return calculo;
     }
+    
+    
+    public INodo copy(){
+        FuncionSuma fs = new FuncionSuma(this.getRaiz(), this.getMaxDescendientes());
+        
+        ArrayList<INodo> arrayDes = this.getDescendientes();
+        
+        if(arrayDes.size() > 0){
+            for(INodo n: arrayDes){
+                INodo nuevo = n.copy();
+                fs.incluirDescendiente(nuevo);
+            }
+        }
+        
+        return fs;
+    }
 }

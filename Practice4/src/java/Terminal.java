@@ -8,6 +8,8 @@ public abstract class Terminal extends Nodo{
     
     public abstract double calcular();
     
+    public abstract INodo copy();
+    
     public String toString(){
         return this.getRaiz();
     }

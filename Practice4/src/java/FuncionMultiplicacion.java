@@ -15,4 +15,20 @@ public class FuncionMultiplicacion extends Funcion{
         }
         return calculo;
     }
+    
+    
+    public INodo copy(){
+        FuncionMultiplicacion fm = new FuncionMultiplicacion(this.getRaiz(), this.getMaxDescendientes());
+        
+        ArrayList<INodo> arrayDes = this.getDescendientes();
+        
+        if(arrayDes.size() > 0){
+            for(INodo n: arrayDes){
+                INodo nuevo = n.copy();
+                fm.incluirDescendiente(nuevo);
+            }
+        }
+        
+        return fm;
+    }
 }

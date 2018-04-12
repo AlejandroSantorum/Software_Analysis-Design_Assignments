@@ -5,5 +5,5 @@ public interface INodo {
     public List<INodo> getDescendientes();
     public void incluirDescendiente(INodo nodo);
     public double calcular();
-    public INodo copy() throws CloneNotSupportedException;
+    public INodo copy();
 } 

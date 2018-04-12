@@ -2,7 +2,7 @@ import java.io.*;
 
 public class TesterLecturaYFitness {
 
- public static void main(String[] args) throws IOException, IOException {
+ public static void main(String[] args) throws IOException, CloneNotSupportedException{
   IDominio domAritm;
   double fitness;
 
