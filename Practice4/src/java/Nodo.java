@@ -44,6 +44,10 @@ public abstract class Nodo implements INodo, Cloneable{
         return descendientes;
     }
     
+    public int getNumDescendientes(){
+        return descendientes.size();
+    }
+    
     
     public int getMaxDescendientes(){
         return maxDescendientes;
