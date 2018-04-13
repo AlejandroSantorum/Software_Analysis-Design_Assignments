@@ -8,6 +8,9 @@ public abstract class Nodo implements INodo, Cloneable{
     private ArrayList<INodo> descendientes;
     
     public Nodo(String simbolo, int maxDescendientes){
+        if(maxDescendientes < 0){
+		      throw new IllegalArgumentException("maxDescendientes es menor que cero: " + maxDescendientes); 
+		}
         descendientes = new ArrayList<INodo>();
         this.simbolo = simbolo;
         this.maxDescendientes = maxDescendientes;

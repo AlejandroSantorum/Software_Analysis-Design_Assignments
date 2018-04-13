@@ -29,6 +29,9 @@ public class PruebaCruce{
         INodo padre1 = ((Nodo) nodoCruce1).getPadre();
         INodo padre2 = ((Nodo) nodoCruce2).getPadre();
         
+        /* PRIMERA IMPLEMENTACION: NO IMPORTABA EL LUGAR DEL NODO DE CRUCE ESCOGIDO */
+        
+        /*
         if(padre1!=null) ((Nodo) padre1).getDescendientes().remove(nodoCruce1);
         if(padre2!=null) ((Nodo) padre2).getDescendientes().remove(nodoCruce2);
         
@@ -39,7 +42,19 @@ public class PruebaCruce{
         if(padre2!=null){
             ((Nodo) padre2).getDescendientes().add(nodoCruce1);
             ((Nodo) nodoCruce1).setPadre(padre2);
-        } 
+        } */
+        
+        /* ======================================================================== */
+        
+        
+        /* SEGUNDA IMPLEMENTACIÓN: SÍ IMPORTA EL LUGAR DEL NODO DE CRUCE ESCOGIDO */
+        if(padre1!=null){
+            ((Nodo)padre1).getDescendientes().set(((Nodo)padre1).getDescendientes().indexOf(nodoCruce1), nodoCruce2);
+        }
+        if(padre2!=null){
+            ((Nodo)padre2).getDescendientes().set(((Nodo)padre2).getDescendientes().indexOf(nodoCruce2), nodoCruce1);
+        }
+        /* ======================================================================= */
         
         IIndividuo nuevo1 = new Individuo();
         nuevo1.setExpresion(copia1);
