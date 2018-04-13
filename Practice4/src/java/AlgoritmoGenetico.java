@@ -1,7 +1,9 @@
+import java.util.*;
+
 public class AlgoritmoGenetico implements IAlgoritmo{
     int numeroIndividuosIniciales;
     int profundidadInicial;
-    int Ktorneo
+    int Ktorneo;
     private List<Terminal> conjuntoTerminales;
     private List<Funcion> conjuntoFunciones;
     private List<IIndividuo> poblacion;
@@ -22,6 +24,7 @@ public class AlgoritmoGenetico implements IAlgoritmo{
 		
         this.numeroIndividuosIniciales = numeroIndividuosIniciales;
         this.profundidadInicial = profundidadInicial;
+        this.Ktorneo = Ktorneo;
     }
     
     
@@ -35,7 +38,7 @@ public class AlgoritmoGenetico implements IAlgoritmo{
     }
     
     
-    public void crearPoblacion() throws ParametroNoInicializadoException{
+    public void crearPoblacion() throws ParametroNoInicializadoException, CruceNuloException, ProfundidadInvalidaException{
         if(conjuntoFunciones == null){
             throw new ParametroNoInicializadoException("el conjunto de funciones no ha sido definido");
         }
@@ -67,8 +70,8 @@ public class AlgoritmoGenetico implements IAlgoritmo{
         ((Nodo) copia1).etiquetarDescendientes();
         ((Nodo) copia2).etiquetarDescendientes();
         
-        int rand1 = aleat_num(1, nNodos1);
-        int rand2 = aleat_num(1, nNodos2);
+        int rand1 = PruebaCruce.aleat_num(1, nNodos1);
+        int rand2 = PruebaCruce.aleat_num(1, nNodos2);
         if(rand1==1 && rand2==1){
             throw new CruceNuloException("Ambos numeros aleatorios son igual a uno");
         }
@@ -99,7 +102,7 @@ public class AlgoritmoGenetico implements IAlgoritmo{
     }
     
     
-    public void crearNuevaPoblacion() throws ParametroNoInicializadoException{
+    public void crearNuevaPoblacion() throws ParametroNoInicializadoException, CruceNuloException, ProfundidadInvalidaException{
         if(conjuntoFunciones == null){
             throw new ParametroNoInicializadoException("el conjunto de funciones no ha sido definido");
         }
@@ -112,8 +115,8 @@ public class AlgoritmoGenetico implements IAlgoritmo{
         
         int tam = poblacion.size();
         
-        int nDirectos = Math.floor(0.1 * tam);
-        int nTorneo = Math.ceil(0.9 * tam);
+        double nDirectos = Math.floor(0.1 * tam);
+        double nTorneo = Math.ceil(0.9 * tam);
         
         ArrayList<IIndividuo> nuevaPobl = new ArrayList<IIndividuo>();
         IIndividuo mejor;
@@ -123,7 +126,7 @@ public class AlgoritmoGenetico implements IAlgoritmo{
         peores.add(poblacion.get(0));
         peores.add(poblacion.get(1));
         
-        for(i=1; i<poblacion.size(); i++){
+        for(int i=1; i<poblacion.size(); i++){
             if(poblacion.get(i).getFitness() > mejor.getFitness()){
                 mejor = poblacion.get(i);
                 continue;
@@ -135,7 +138,7 @@ public class AlgoritmoGenetico implements IAlgoritmo{
                 }
                 else{
                     peores.remove(0);
-                    peores.add(poblacion.get(i);
+                    peores.add(poblacion.get(i));
                 }
             } 
         }
@@ -143,7 +146,7 @@ public class AlgoritmoGenetico implements IAlgoritmo{
         nuevaPobl.add(mejor);
         
         
-        for(i=0; i<nDirectos; i++){
+        for(int i=0; i<nDirectos; i++){
             int rand = PruebaCruce.aleat_num(0, poblacion.size()-1);
             IIndividuo indAux = poblacion.remove(rand);
             nuevaPobl.add(indAux);
@@ -151,38 +154,42 @@ public class AlgoritmoGenetico implements IAlgoritmo{
         
         
         ArrayList<IIndividuo> seleccionados = new ArrayList<IIndividuo>();
-        for(j=0; j<Ktorneo; j++){
+        for(int j=0; j<Ktorneo; j++){
             int rand = PruebaCruce.aleat_num(0, poblacion.size()-1);
             seleccionados.add(poblacion.get(rand));
         }
         
-        IIndividuo<IIndividuo> dosMejores = new ArrayList<IIndividuo>();
+        ArrayList<IIndividuo> dosMejores = new ArrayList<IIndividuo>();
         dosMejores.add(seleccionados.get(0));
         dosMejores.add(seleccionados.get(1));
-        for(i=2; i<Ktorneo; i++){
+        for(int i=2; i<Ktorneo; i++){
             if(seleccionados.get(i).getFitness() > dosMejores.get(0).getFitness() || seleccionados.get(i).getFitness() > dosMejores.get(1).getFitness()){
                 if(dosMejores.get(0).getFitness() > dosMejores.get(1).getFitness()){
                     dosMejores.remove(1);
-                    dosMejores.add(seleccionados(i));
+                    dosMejores.add(seleccionados.get(i));
                 }
                 else{
                     dosMejores.remove(0);
-                    dosMejores.add(seleccionados(i));
+                    dosMejores.add(seleccionados.get(i));
                 }
             }
         }
         
-        dosMejores = cruce(dosMejores.get(0), dosMejores.get(1));
+        List<IIndividuo> cruzados = new ArrayList<IIndividuo>();
+        cruzados = cruce(dosMejores.get(0), dosMejores.get(1));
         
         poblacion.remove(peores.get(0));
         poblacion.remove(peores.get(1));
         
-        poblacion.add(dosMejores(0));
-        poblacion.add(dosMejores(1));
+        poblacion.add(cruzados.get(0));
+        poblacion.add(cruzados.get(1));
         poblacion.addAll(nuevaPobl);
     }
     
     
+    public List<IIndividuo> getPoblacion(){
+        return poblacion;
+    }
     
     
 }

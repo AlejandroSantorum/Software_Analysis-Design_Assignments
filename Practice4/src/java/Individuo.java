@@ -66,7 +66,6 @@ public class Individuo implements IIndividuo{
             }
             
             ArrayList<INodo> hijos = ((Nodo) this.raiz).getDescendientes();
-            System.out.println("Numero descendientes = "+hijos.size());
             
             for(INodo hijo: hijos){
                 Individuo ind = new Individuo();
