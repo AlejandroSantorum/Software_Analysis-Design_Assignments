@@ -7,7 +7,7 @@ public class PruebaCruce{
         return (min + rand.nextInt((max-min)+1));
     }
     
-    public ArrayList<IIndividuo> cruce(IIndividuo ind1, IIndividuo ind2) throws CruceNuloException{
+    public ArrayList<IIndividuo> cruce(IIndividuo ind1, IIndividuo ind2) throws CruceNuloException, MaximosDescendientesException{
         INodo copia1 = ind1.getExpresion().copy();
         INodo copia2 = ind2.getExpresion().copy();
         

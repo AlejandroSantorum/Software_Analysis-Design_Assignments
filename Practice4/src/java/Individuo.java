@@ -36,7 +36,7 @@ public class Individuo implements IIndividuo{
         ((Nodo) this.raiz).etiquetarDescendientes();
     }
     
-    public void crearIndividuoAleatorio(int profundidad, List<Terminal> terminales, List<Funcion> funciones) throws ProfundidadInvalidaException{
+    public void crearIndividuoAleatorio(int profundidad, List<Terminal> terminales, List<Funcion> funciones) throws ProfundidadInvalidaException, MaximosDescendientesException{
         if(profundidad <= 1){
             throw new ProfundidadInvalidaException("crearIndividuoAleatorio: no se admite una profundidad menor o igual a uno");
         }

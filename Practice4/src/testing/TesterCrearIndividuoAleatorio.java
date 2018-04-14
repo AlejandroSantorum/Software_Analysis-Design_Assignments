@@ -3,7 +3,7 @@ import java.io.*;
 
 public class TesterCrearIndividuoAleatorio{ 
     
-    public static void main(String[] args) throws ProfundidadInvalidaException{
+    public static void main(String[] args) throws ProfundidadInvalidaException, MaximosDescendientesException{
         if(args.length < 1){
             System.err.println("Error: numero de parámetros de entrada insuficiente. Introduzca profundidad");
             return;

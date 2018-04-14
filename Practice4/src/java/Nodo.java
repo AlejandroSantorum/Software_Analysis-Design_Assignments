@@ -57,10 +57,9 @@ public abstract class Nodo implements INodo, Cloneable{
     }
     
     
-    public void incluirDescendiente(INodo nodo){
+    public void incluirDescendiente(INodo nodo) throws MaximosDescendientesException{
         if(this.descendientes.size() == maxDescendientes){
-            //---> excepcion <--- 
-            System.out.println("ERROROROROROROROOROROORORO MAXDESCENDIENTES");
+            throw new MaximosDescendientesException("Alcanzado el numero maximo de descendientes, no se puede incluir otro descendiente");
         }
         
         INodo copia = nodo.copy();
@@ -72,7 +71,7 @@ public abstract class Nodo implements INodo, Cloneable{
     public abstract double calcular();
     
     
-    public abstract INodo copy();
+    public abstract INodo copy() throws MaximosDescendientesException;
     
     
     // Esta funcion devuelve todos los descendientes del nodo MÁS EL PROPIO NODO

@@ -36,7 +36,7 @@ public class DominioAritmetico extends Dominio{
     
     public List<Funcion> definirConjuntoFunciones(int[] argumentos, String... funciones) throws ArgsDistintosFuncionesException{
         if(argumentos.length != funciones.length){
-            return null; // ----> EXCEPCIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON <----
+            throw new ArgsDistintosFuncionesException("El numero de simbolos de funciones es diferente al tamaño del array de argumentos");
         }
         
         if(funcionesDefinidas==null){
@@ -79,6 +79,7 @@ public class DominioAritmetico extends Dominio{
         try(BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(ficheroDatos)))){
 			String line;
 			String[] items = new String[]{};
+			double fitnessMaximo = 0.0;
 			
 			while((line = reader.readLine()) != null) {
 				items = line.split(" ");
@@ -89,14 +90,16 @@ public class DominioAritmetico extends Dominio{
 				
 				valores.add(Double.parseDouble(items[0]));
 				reales.add(Double.parseDouble(items[1]));
+				fitnessMaximo += 1.0;
 			}
+			super.setFitnessMaximo(fitnessMaximo);
 		}catch(IOException ex) {
 			throw ex;
 		};
     }
     
     
-    public double calcularFitness(IIndividuo individuo){
+    public double calcularFitness(IIndividuo individuo, int flag){
         Double estimado, real;
         int fitness=0;
         
@@ -106,7 +109,9 @@ public class DominioAritmetico extends Dominio{
             estimado = (individuo.getExpresion()).calcular();
             real = reales.get(i);
             
-            System.out.println("Valor "+valores.get(i)+" <-> Rdo estimado: "+estimado+" <-> Rdo real: "+real);
+            if(flag!=0){
+                System.out.println("Valor "+valores.get(i)+" <-> Rdo estimado: "+estimado+" <-> Rdo real: "+real);
+            }
             
             estimados.add(estimado); /* OPCIONAL */
             
@@ -116,5 +121,14 @@ public class DominioAritmetico extends Dominio{
         }
         individuo.setFitness(fitness);
         return fitness;
+    }
+    
+    
+    public ArrayList<Funcion> getFuncionesDefinidas(){
+        return funcionesDefinidas;
+    }
+    
+    public ArrayList<Terminal> getTerminalesDefinidos(){
+        return terminalesDefinidos;
     }
 }

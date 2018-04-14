@@ -17,7 +17,7 @@ public class FuncionMultiplicacion extends Funcion{
     }
     
     
-    public INodo copy(){
+    public INodo copy() throws MaximosDescendientesException{
         FuncionMultiplicacion fm = new FuncionMultiplicacion(this.getRaiz(), this.getMaxDescendientes());
         
         ArrayList<INodo> arrayDes = this.getDescendientes();

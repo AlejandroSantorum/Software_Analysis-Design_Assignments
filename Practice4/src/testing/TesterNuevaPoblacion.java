@@ -3,7 +3,7 @@ import java.io.*;
 
 public class TesterNuevaPoblacion{ 
     
-    public static void main(String[] args) throws IOException, CruceNuloException, FileNotFoundException, ParametroNoInicializadoException, ProfundidadInvalidaException, ArgsDistintosFuncionesException{
+    public static void main(String[] args) throws IOException, CruceNuloException, FileNotFoundException, ParametroNoInicializadoException, ProfundidadInvalidaException, MaximosDescendientesException, ArgsDistintosFuncionesException{
         Terminal x = new TerminalAritmetico("x");
         Funcion suma = new FuncionSuma("+", 2);
         Funcion resta = new FuncionResta("-", 2);
@@ -19,7 +19,7 @@ public class TesterNuevaPoblacion{
         conjuntoFunciones.add(resta);
         conjuntoFunciones.add(multi);
         
-        AlgoritmoGenetico algGen = new AlgoritmoGenetico(10, 3, 4);
+        AlgoritmoGenetico algGen = new AlgoritmoGenetico(10, 4, 5, 0.9, 1000);
         IDominio domAritm;
         domAritm = new DominioAritmetico();
         domAritm.definirValoresPrueba("valoresReducido.txt");
@@ -33,7 +33,7 @@ public class TesterNuevaPoblacion{
         
         for(IIndividuo ind: pobl){
             System.out.println("Individuo ==>");
-            domAritm.calcularFitness(ind);
+            domAritm.calcularFitness(ind, 0);
             ind.writeIndividuo();
             System.out.println();
         }

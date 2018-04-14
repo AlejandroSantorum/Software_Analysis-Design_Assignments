@@ -3,7 +3,7 @@ import java.util.*;
 
 public class TesterEtiquetarDescendientes{
     
-    public static void main(String[] args) throws CloneNotSupportedException, IOException{
+    public static void main(String[] args) throws CloneNotSupportedException, IOException, MaximosDescendientesException{
         Terminal x = new TerminalAritmetico("x");
         Funcion suma = new FuncionSuma("+", 2);
         Funcion resta = new FuncionResta("-", 2);

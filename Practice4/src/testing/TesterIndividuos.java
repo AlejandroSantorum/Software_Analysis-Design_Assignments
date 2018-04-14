@@ -1,5 +1,5 @@
 public class TesterIndividuos {
-    public static void main(String[] args) throws CloneNotSupportedException{
+    public static void main(String[] args) throws MaximosDescendientesException{
         Terminal x = new TerminalAritmetico("x");
         Funcion suma = new FuncionSuma("+", 2);
         Funcion resta = new FuncionResta("-", 2);

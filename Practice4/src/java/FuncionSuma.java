@@ -17,7 +17,7 @@ public class FuncionSuma extends Funcion{
     }
     
     
-    public INodo copy(){
+    public INodo copy() throws MaximosDescendientesException{
         FuncionSuma fs = new FuncionSuma(this.getRaiz(), this.getMaxDescendientes());
         
         ArrayList<INodo> arrayDes = this.getDescendientes();

@@ -9,7 +9,7 @@ public abstract class Funcion extends Nodo{
     
     public abstract double calcular();
     
-    public abstract INodo copy();
+    public abstract INodo copy() throws MaximosDescendientesException;
     
     
     public String toString(){

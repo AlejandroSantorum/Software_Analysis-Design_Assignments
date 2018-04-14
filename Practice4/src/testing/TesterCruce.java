@@ -3,7 +3,7 @@ import java.io.*;
 
 public class TesterCruce { 
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MaximosDescendientesException{
         PruebaCruce prueba = new PruebaCruce();
         List<IIndividuo> descendientes = new ArrayList<IIndividuo>();
         Terminal x = new TerminalAritmetico("x");

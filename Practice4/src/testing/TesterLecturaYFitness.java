@@ -2,7 +2,7 @@ import java.io.*;
 
 public class TesterLecturaYFitness {
 
- public static void main(String[] args) throws IOException, CloneNotSupportedException{
+ public static void main(String[] args) throws IOException, MaximosDescendientesException{
   IDominio domAritm;
   double fitness;
 
@@ -26,7 +26,7 @@ public class TesterLecturaYFitness {
   indiv.writeIndividuo();
   System.out.println();
 
-  fitness = domAritm.calcularFitness(indiv);
+  fitness = domAritm.calcularFitness(indiv, 1);
   System.out.println("\nFITNESS= "+fitness);
  }
 } 

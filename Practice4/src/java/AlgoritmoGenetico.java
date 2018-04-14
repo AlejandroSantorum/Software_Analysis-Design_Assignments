@@ -1,16 +1,19 @@
 import java.util.*;
 
 public class AlgoritmoGenetico implements IAlgoritmo{
-    int numeroIndividuosIniciales;
-    int profundidadInicial;
-    int Ktorneo;
+    private int numeroIndividuosIniciales;
+    private int profundidadInicial;
+    private int Ktorneo;
+    private double probCruce;
+    private int numGeneraciones;
     private List<Terminal> conjuntoTerminales;
     private List<Funcion> conjuntoFunciones;
     private List<IIndividuo> poblacion;
+    private double fitnessMejor;
     
-    public AlgoritmoGenetico(int numeroIndividuosIniciales, int profundidadInicial, int Ktorneo){
+    public AlgoritmoGenetico(int numeroIndividuosIniciales, int profundidadInicial, int Ktorneo, double probCruce, int numGeneraciones){
         if(numeroIndividuosIniciales <= 8){
-		      throw new IllegalArgumentException("El numero de individuos iniciales es demasiado pequeña = " +numeroIndividuosIniciales+" Cota inferior permitida = 8"); 
+		      throw new IllegalArgumentException("El numero de individuos iniciales es demasiado pequeña = " +numeroIndividuosIniciales+". Cota inferior permitida = 8"); 
 		}
 		if(profundidadInicial <= 0){
 		      throw new IllegalArgumentException("La profundidad de la poblacion inicial es menor o igual a cero: " + profundidadInicial); 
@@ -21,10 +24,18 @@ public class AlgoritmoGenetico implements IAlgoritmo{
 		if(Ktorneo >= 0.9*numeroIndividuosIniciales){
 		    throw new IllegalArgumentException("La constante de seleccion del torneo es demasiado grande en comparacion con los individuos iniciales"); 
 		}
+		if(probCruce < 0.65){
+		    throw new IllegalArgumentException("Probabilidad de cruce muy baja: " + probCruce +". Cota inferior permitida 0.65 = 65%");
+		}
+		if(numGeneraciones < 3){
+		    throw new IllegalArgumentException("Numero de generaciones muy baja: " + numGeneraciones +". Cota inferior permitida = 3");
+		}
 		
         this.numeroIndividuosIniciales = numeroIndividuosIniciales;
         this.profundidadInicial = profundidadInicial;
         this.Ktorneo = Ktorneo;
+        this.probCruce = probCruce;
+        this.numGeneraciones = numGeneraciones;
     }
     
     
@@ -38,7 +49,7 @@ public class AlgoritmoGenetico implements IAlgoritmo{
     }
     
     
-    public void crearPoblacion() throws ParametroNoInicializadoException, CruceNuloException, ProfundidadInvalidaException{
+    public void crearPoblacion() throws ParametroNoInicializadoException, CruceNuloException, ProfundidadInvalidaException, MaximosDescendientesException{
         if(conjuntoFunciones == null){
             throw new ParametroNoInicializadoException("el conjunto de funciones no ha sido definido");
         }
@@ -60,7 +71,7 @@ public class AlgoritmoGenetico implements IAlgoritmo{
     }
     
     
-    public List<IIndividuo> cruce(IIndividuo prog1, IIndividuo prog2) throws CruceNuloException{
+    public List<IIndividuo> cruce(IIndividuo prog1, IIndividuo prog2) throws CruceNuloException, MaximosDescendientesException{
         INodo copia1 = prog1.getExpresion().copy();
         INodo copia2 = prog2.getExpresion().copy();
         
@@ -102,7 +113,7 @@ public class AlgoritmoGenetico implements IAlgoritmo{
     }
     
     
-    public void crearNuevaPoblacion() throws ParametroNoInicializadoException, CruceNuloException, ProfundidadInvalidaException{
+    public void crearNuevaPoblacion() throws ParametroNoInicializadoException, CruceNuloException, ProfundidadInvalidaException, MaximosDescendientesException{
         if(conjuntoFunciones == null){
             throw new ParametroNoInicializadoException("el conjunto de funciones no ha sido definido");
         }
@@ -144,7 +155,10 @@ public class AlgoritmoGenetico implements IAlgoritmo{
         }
         poblacion.remove(mejor);
         nuevaPobl.add(mejor);
-        
+        System.out.println("Mejor individuo de esta generacion:");
+        mejor.writeIndividuo();
+        System.out.println("FITNESS = "+mejor.getFitness());
+        this.fitnessMejor = mejor.getFitness();
         
         for(int i=0; i<nDirectos; i++){
             int rand = PruebaCruce.aleat_num(0, poblacion.size()-1);
@@ -176,7 +190,16 @@ public class AlgoritmoGenetico implements IAlgoritmo{
         }
         
         List<IIndividuo> cruzados = new ArrayList<IIndividuo>();
-        cruzados = cruce(dosMejores.get(0), dosMejores.get(1));
+        
+        int exito=0;
+        while(exito==0){
+            try{
+                cruzados = cruce(dosMejores.get(0), dosMejores.get(1));
+                exito=1;
+            }catch(CruceNuloException ex){
+                
+            }
+        }
         
         poblacion.remove(peores.get(0));
         poblacion.remove(peores.get(1));
@@ -191,5 +214,49 @@ public class AlgoritmoGenetico implements IAlgoritmo{
         return poblacion;
     }
     
+    
+    public void ejecutar(IDominio dominio) throws ParametroNoInicializadoException, CruceNuloException, ProfundidadInvalidaException, MaximosDescendientesException{
+        if(((DominioAritmetico) dominio).getFitnessMaximo() == -1.0){
+            throw new ParametroNoInicializadoException("No se ha inicializado en el dominio el fichero de texto con los datos");
+        }
+        IIndividuo mejorFinal;
+        conjuntoFunciones = ((Dominio) dominio).getFuncionesDefinidas();
+        conjuntoTerminales = ((Dominio) dominio).getTerminalesDefinidos();
+        
+        this.crearPoblacion();
+        
+        for(int i=0; i<this.numGeneraciones; i++){
+            System.out.println("\t GENERACION NUMERO "+i);
+            
+            for(IIndividuo ind: poblacion){
+                dominio.calcularFitness(ind, 0);
+            }
+            
+            if(this.fitnessMejor == ((Dominio) dominio).getFitnessMaximo()){
+                System.out.println("Fitness maximo alcanzado!");
+                for(IIndividuo ind: poblacion){
+                    if(ind.getFitness() == fitnessMejor){
+                        System.out.println("INDIVIDUO OBTENIDO:");
+                        ind.writeIndividuo();
+                        System.out.println("Con FITNESS = "+ind.getFitness());
+                        return;
+                    }
+                }
+            }
+            
+            this.crearNuevaPoblacion();
+        }
+        
+        System.out.println("Numero maximo de generaciones alcanzado");
+        for(IIndividuo ind: poblacion){
+            if(ind.getFitness() == fitnessMejor){
+                System.out.println("INDIVIDUO OBTENIDO:");
+                ind.writeIndividuo();
+                System.out.println("Con FITNESS = "+ind.getFitness()+". Maximo posible = "+((Dominio) dominio).getFitnessMaximo());
+                return;
+            }
+        }
+        return;
+    }
     
 }
