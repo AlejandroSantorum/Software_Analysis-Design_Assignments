@@ -216,7 +216,7 @@ public class AlgoritmoGenetico implements IAlgoritmo{
     
     
     public void ejecutar(IDominio dominio) throws ParametroNoInicializadoException, CruceNuloException, ProfundidadInvalidaException, MaximosDescendientesException{
-        if(((DominioAritmetico) dominio).getFitnessMaximo() == -1.0){
+        if(((Dominio) dominio).getFitnessMaximo() == -1.0){
             throw new ParametroNoInicializadoException("No se ha inicializado en el dominio el fichero de texto con los datos");
         }
         IIndividuo mejorFinal;

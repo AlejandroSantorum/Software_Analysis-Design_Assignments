@@ -17,7 +17,6 @@ public class TerminalAritmetico extends Terminal{
     
     public INodo copy(){
         TerminalAritmetico ta = new TerminalAritmetico(this.getRaiz());
-        
         return ta;
     }
 }
