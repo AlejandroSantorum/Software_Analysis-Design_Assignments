@@ -1,8 +1,8 @@
 import java.util.*;
 
-public class TesterAlgoritmoGenetico{
+public class TesterGrafo{
     
-    public static void main(String[] args){
+    public static void main(String[] args) throws AristaInvalidaException, VerticeIdException{
         Grafo<String> g = new GrafoNoDirigido<>();
         //Grafo<String> g = new GrafoDirigido<>();
         System.out.println(g.getClass().getName() + "\n");
